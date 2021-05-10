@@ -64,27 +64,27 @@ export const GameScreen: React.FC<Props> = ({ navigation, route }) => {
       });
     }
     if (lettersLeft.join("").replace(/\*/g, " ").toUpperCase() == answer.toUpperCase()) {
-      Alert.alert(
-        'You win',
-        'You have gussed the correct answer',
-        [
-          { text: 'OK', onPress: () => navigation.goBack() },
-        ],
-        { cancelable: false }
-      )
+      showAlert('You win', 'You have gussed the correct answer')
+  
     }
     if (wrong > 4) {
-      Alert.alert(
-        'You Lost',
-        'Answer: ' + answer.toUpperCase() + " " + hint,
-        [
-          { text: 'OK', onPress: () => navigation.goBack() },
-        ],
-        { cancelable: false }
-      )
+      showAlert('You Lost', 'Answer: ' + answer.toUpperCase() + " " + hint)
+
     }
   }
 
+  const showAlert = (title: string, message: string)=>{
+    return(
+      Alert.alert(
+        title,
+       message,
+        [
+          { text: 'OK', onPress: () => navigation.goBack() },
+        ],
+        { cancelable: false }
+      )
+    )
+  }
   const RenderDashes = () => {
     return (
       <View style={styles.dashes}>
